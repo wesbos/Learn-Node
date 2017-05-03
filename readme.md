@@ -1,4 +1,4 @@
-[https://LearnNode.com](![](http://wes.io/kH9O/wowwwwwwwww.jpg))
+[![](http://wes.io/kH9O/wowwwwwwwww.jpg)](https://LearnNode.com)
 
 # Learn Node Starter Files + Stepped Solutions
 

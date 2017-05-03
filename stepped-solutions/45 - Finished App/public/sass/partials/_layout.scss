@@ -1,0 +1,26 @@
+html {
+  font-size: 10px;
+}
+
+body {
+  background: $purple;
+  background:#efefef;
+  &:before {
+    content: '';
+    display: block;
+    background: $grad;
+    height: 10px;
+    width: 100%;
+  }
+}
+
+.inner {
+  max-width:900px;
+  margin: 0 auto;
+  @media all and (max-width: 900px) {
+    padding: 2rem;
+  }
+  &--flashes {
+    padding:0;
+  }
+}

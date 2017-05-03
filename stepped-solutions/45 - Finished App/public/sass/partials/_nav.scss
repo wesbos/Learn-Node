@@ -1,0 +1,127 @@
+.nav {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  justify-content: space-between;
+  background: $black;
+  &__section {
+    display: flex;
+    &--search {
+      flex: 1 1 auto;
+    }
+  }
+  &__item {
+    display: flex;
+  }
+  &__link {
+    background: $black;
+    color: white;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    text-transform: uppercase;
+    padding: 1.2rem 2rem 1rem 2rem;
+    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+    border-bottom: 5px solid transparent;
+    svg {
+      width: 40px;
+      transition: all 0.2s;
+      fill: white;
+      margin-bottom: 1rem;
+    }
+    &:hover, &--active {
+      border-bottom-color: rgba(0,0,0,0.2);
+      border-right-color: rgba(0,0,0,0.05);
+      svg {
+        transform: scale(1.2)
+      }
+      background: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, $yellow 85%, #48ded4 95%) fixed;
+      // background: none;
+    }
+    &--logo {
+      &:hover {
+        svg {
+          transform: none;
+        }
+      }
+      svg {
+        width: 200px;
+        margin: 0;
+      }
+    }
+  }
+}
+
+
+@media all and (max-width: 1200px) {
+  .nav {
+    &__link {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      svg {
+        width: 30px;
+      }
+      &--logo {
+        svg {
+          width: 100px;
+        }
+      }
+    }
+  }
+}
+
+@media all and (max-width: 900px) {
+  .nav {
+    flex-wrap:wrap;
+    &__section {
+      order: 1;
+      &--search {
+        border-top: 1px solid rgba(255,255,255,0.1);
+        order: 2;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media all and (max-width: 650px) {
+  .nav {
+    &__section {
+      width: 100%;
+      &--user {
+        order: -1;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        .avatar {
+          min-width: 20px;
+          height: 20px;
+        }
+        svg {
+          display: none;
+        }
+      }
+    }
+    &__item {
+      width: 33.333333%;
+    }
+    &__link {
+      width: 100%;
+      svg {
+        // width: 5px;
+        max-width: 100%;
+      }
+      &--logo {
+        svg {
+          width:100%;
+        }
+      }
+    }
+  }
+  .heart-count:before {
+    content: '♥️';
+    margin-right: 1rem;
+  }
+}

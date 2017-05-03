@@ -1,0 +1,11 @@
+mixin storeCard(store = {})
+  .store
+    .store__hero
+      .store__actions
+        button soon
+      img(src=`/uploads/${store.photo || 'store.png'}`)
+      h2.title
+        a(href=`/store/${store.slug}`) #{store.name}
+    .store__details
+      p= store.description.split(' ').slice(0, 25).join(' ')
+

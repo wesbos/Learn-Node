@@ -1,0 +1,11 @@
+$black: #303030;
+$width: 800px;
+$purple: #262161;
+$yellow: #FFC40E;
+$pink: #EE7297;
+$green: #93FF00;
+$red: #E50714;
+$grey: lighten(grey, 40%);
+$shad: 0 0 10px rgba(0,0,0,0.1), 0 5px 10px rgba(0,0,0,0.05);
+$grad: linear-gradient(90deg, #48ded4 0%, #a026bf 20%, #e82c75 60%, $yellow 85%, #48ded4 95%);
+$verticalGrad: linear-gradient(0, #48ded4 0%, #a026bf 20%, #e82c75 60%, $yellow 85%, #48ded4 95%);

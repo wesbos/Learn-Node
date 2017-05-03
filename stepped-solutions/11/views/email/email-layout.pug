@@ -1,0 +1,30 @@
+//- Handy mixin for making buttons
+mixin button(url, text)
+  table.btn.btn-primary(border='0', cellpadding='0', cellspacing='0')
+    tbody
+      tr
+        td(align='left')
+          table(border='0', cellpadding='0', cellspacing='0')
+            tbody: tr: td: a(href=url, target='_blank')= text
+
+//- The Email
+doctype html
+html
+  head
+    meta(name='viewport', content='width=device-width')
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    style
+      include styles.css
+  body
+    table.body(border='0', cellpadding='0', cellspacing='0')
+      tr
+        td  
+        td.container
+          .content
+            table.main
+              tr
+                td.wrapper
+                  table(border='0', cellpadding='0', cellspacing='0')
+                    tr
+                      td
+                        block content

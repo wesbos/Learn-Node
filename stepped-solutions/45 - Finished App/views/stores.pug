@@ -1,0 +1,12 @@
+extends layout
+
+include mixins/_storeCard
+include mixins/_pagination
+
+block content
+  .inner
+    h2= title
+    .stores
+      each store in stores
+        +storeCard(store)
+    +pagination(page, pages, count)

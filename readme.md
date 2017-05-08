@@ -1,6 +1,3 @@
-# Hey Snoopers! This course isn't launched yet! It will be a few days :)
-
-
 [![](http://wes.io/kH9O/wowwwwwwwww.jpg)](https://LearnNode.com)
 
 # Learn Node Starter Files + Stepped Solutions

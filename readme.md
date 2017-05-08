@@ -23,3 +23,10 @@ If you found a different / better way to solve problems in the application, grea
 Glaring errors, clarifications and files that aren't shown in the videos are totally fair game for pull requests and are appreciated.
 
 Enjoy!
+
+## FAQ
+
+### I'm getting errors related to `/data/db` like `code:100` and `connection failed`
+
+Check out [this answer](https://stackoverflow.com/questions/7948789/mongodb-mongod-complains-that-there-is-no-data-db-folder#answer-7948986) on stack overflow to get mongoDB running locally.
+

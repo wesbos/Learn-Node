@@ -62,7 +62,7 @@ exports.developmentErrors = (err, req, res, next) => {
 
 
 /*
-  Production Error Hanlder
+  Production Error Handler
 
   No stacktraces are leaked to user
 */

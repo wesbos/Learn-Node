@@ -1,0 +1,46 @@
+.heart {
+  &__button {
+    background: none;
+    border: 0;
+    outline: 0;
+    position: relative;
+    &:after {
+      content: '♥️';
+      font-size: 20px;
+      position: absolute;
+      opacity: 0;
+      top: 0;
+    }
+    svg {
+      width: 25px;
+      fill: white;
+    }
+    &--hearted {
+      svg {
+        fill: red;
+      }
+    }
+    &--float {
+      &:after {
+        animation: fly 2.5s 1 ease-out;
+      }
+    }
+  }
+}
+
+@keyframes fly {
+  0% {
+    transform: translateY(0);
+    left: 0;
+    opacity: 1;
+  }
+  20% { left: 20px; }
+  40% { left: -20px; }
+  60% { left: 20px; }
+  80% { left: -20px; }
+  100% {
+    transform: translateY(-400px);
+    opacity: 0;
+    left: 20px;
+  }
+}

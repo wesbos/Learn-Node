@@ -26,6 +26,12 @@ Enjoy!
 
 ## FAQ
 
+### The Google Maps API key isn't working
+
+The course might have hit a limit with the API key — if this is the case you need to sign up for your own API key over at <https://developers.google.com/maps/documentation/javascript/usage>. 
+
+Once you have the API key, simply place it in your `variables.env` file and restart
+
 ### I'm getting errors related to `/data/db` like `code:100` and `connection failed`
 
 Check out [this answer](https://stackoverflow.com/questions/7948789/mongodb-mongod-complains-that-there-is-no-data-db-folder#answer-7948986) on stack overflow to get mongoDB running locally.

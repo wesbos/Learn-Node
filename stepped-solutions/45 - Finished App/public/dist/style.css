@@ -1041,7 +1041,7 @@ label {
     display: flex;
     -ms-flex-pack: center;
         justify-content: center;
-    algin-items: center;
+    align-items: center;
     border-top: 1px solid #e6e6e6; }
     .reviewer__meta > * {
       -ms-flex: 1;

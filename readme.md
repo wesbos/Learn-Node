@@ -28,9 +28,9 @@ Enjoy!
 
 ### The Google Maps API key isn't working
 
-The course might have hit a limit with the API key — if this is the case you need to sign up for your own API key over at <https://developers.google.com/maps/documentation/javascript/usage>. 
+The course might have hit a limit with the API key — if this is the case you need to sign up for your own API key over at <https://developers.google.com/maps/documentation/javascript/usage>. You will need to enable static maps for your API key. [Here is a quick video on how to do this](http://wes.io/khGn). 
 
-Once you have the API key, simply place it in your `variables.env` file and restart
+Once you have the API key, simply place it in your `variables.env` file and restart.
 
 ### I'm getting errors related to `/data/db` like `code:100` and `connection failed`
 

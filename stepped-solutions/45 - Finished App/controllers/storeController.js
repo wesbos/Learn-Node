@@ -169,7 +169,7 @@ exports.heartStore = async (req, res) => {
 
   const operator = hearts.includes(req.params.id) ? '$pull' : '$addToSet';
   const user = await User
-    .findByIdAndUpdate(req.user._id,
+    .findByIdAndUpdate({_id: req.user._id},
       { [operator]: { hearts: req.params.id } },
       { new: true }
     );

@@ -63,21 +63,21 @@ exports.editStore = async (req, res) => {
   res.render('editStore', { title: `Edit ${store.name}`, store });
 };
 
+// we need async here since we have 
+// catchErrors(storeController.updateStore) in routes/index.js
 exports.updateStore = async (req, res) => {
-  // set the location data to be a point
+  // 1. Set the location data to be a point
   req.body.location.type = 'Point';
-  // find and update the store
-  const store = await Store.findOneAndUpdate({ _id: req.params.id }, req.body, {
-    new: true, // return the new store instead of the old one
-    runValidators: true
-  }).exec();
-  req.flash('success', `Successfully updated <strong>${store.name}</strong>. <a href="/stores/${store.slug}">View Store →</a>`);
-  res.redirect(`/stores/${store._id}/edit`);
-  // Redriect them the store and tell them it worked
-};
-
-exports.getStoreBySlug = async (req, res, next) => {
-  const store = await Store.findOne({ slug: req.params.slug });
-  if (!store) return next();
-  res.render('store', { store, title: store.name });
+  // 2. Find and update the store
+  await Store.findById(req.params.id, async (err, store) => {
+    if (store) {
+      Object.assign(store, req.body);
+      const updatedStore = await store.save({ validateBeforeSave: true });
+        // 2. Redriect them the store and tell them it worked
+      req.flash('success', `Successfuly updtaed <strong>${updatedStore.name}</strong> <a href="/store/${updatedStore.slug}">View Store -></a>`);
+      res.redirect(`/stores/${updatedStore._id}/edit`);
+    } else {
+      return next(Error('Cant find Store'));
+    }
+  });
 };

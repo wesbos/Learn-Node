@@ -41,3 +41,19 @@ Check out [this answer](https://stackoverflow.com/questions/7948789/mongodb-mong
 Thanks to [Chris Ellinger](https://twitter.com/devoidofgenius) for this: 
 
 > If you’re getting a `URIError: URI malformed` error when running `npm start`, break out your environment variables. Go into `variables.env` and split the URI like this `MONGO_URI=mongodb://host.com:port` `DB_USER=username` and `DB_PASS=password`. Then inside your `start.js` replace `mongoose.connect(process.env.DATABASE)` with `mongoose.connect(process.env.MONGO_URI, {user: process.env.DB_USER, pass: process.env.DB_PASS});`. I had issues connecting to my mongodb because my password contained symbols.
+
+## Contributors
+
+<!-- CONTRIBUTORS LIST:START -->
+[<img alt="wesbos" src="https://avatars6.githubusercontent.com/u/176013?v=4&s=117" width="117">](https://github.com/wesbos/Learn-Node/commits?author=wesbos) |[<img alt="vladikoff" src="https://avatars7.githubusercontent.com/u/128755?v=4&s=117" width="117">](https://github.com/wesbos/Learn-Node/commits?author=vladikoff) |[<img alt="chasingSublimity" src="https://avatars7.githubusercontent.com/u/21029639?v=4&s=117" width="117">](https://github.com/wesbos/Learn-Node/commits?author=chasingSublimity) |[<img alt="camjm" src="https://avatars5.githubusercontent.com/u/2276730?v=4&s=117" width="117">](https://github.com/wesbos/Learn-Node/commits?author=camjm) |[<img alt="htmlandbacon" src="https://avatars4.githubusercontent.com/u/4334015?v=4&s=117" width="117">](https://github.com/wesbos/Learn-Node/commits?author=htmlandbacon) |[<img alt="eduplessis" src="https://avatars5.githubusercontent.com/u/398245?v=4&s=117" width="117">](https://github.com/wesbos/Learn-Node/commits?author=eduplessis) |
+:---: |:---: |:---: |:---: |:---: |:---: |
+[wesbos](https://github.com/wesbos) |[vladikoff](https://github.com/vladikoff) |[chasingSublimity](https://github.com/chasingSublimity) |[camjm](https://github.com/camjm) |[htmlandbacon](https://github.com/htmlandbacon) |[eduplessis](https://github.com/eduplessis) |
+
+[<img alt="antibland" src="https://avatars5.githubusercontent.com/u/219139?v=4&s=117" width="117">](https://github.com/wesbos/Learn-Node/commits?author=antibland) |[<img alt="marcus-crane" src="https://avatars6.githubusercontent.com/u/14816406?v=4&s=117" width="117">](https://github.com/wesbos/Learn-Node/commits?author=marcus-crane) |[<img alt="mikeybyker" src="https://avatars7.githubusercontent.com/u/1440962?v=4&s=117" width="117">](https://github.com/wesbos/Learn-Node/commits?author=mikeybyker) |[<img alt="mohitgarg" src="https://avatars6.githubusercontent.com/u/14136405?v=4&s=117" width="117">](https://github.com/wesbos/Learn-Node/commits?author=mohitgarg) |[<img alt="zero-t4" src="https://avatars7.githubusercontent.com/u/7101905?v=4&s=117" width="117">](https://github.com/wesbos/Learn-Node/commits?author=zero-t4) |[<img alt="RCopeland" src="https://avatars4.githubusercontent.com/u/412903?v=4&s=117" width="117">](https://github.com/wesbos/Learn-Node/commits?author=RCopeland) |
+:---: |:---: |:---: |:---: |:---: |:---: |
+[antibland](https://github.com/antibland) |[marcus-crane](https://github.com/marcus-crane) |[mikeybyker](https://github.com/mikeybyker) |[mohitgarg](https://github.com/mohitgarg) |[zero-t4](https://github.com/zero-t4) |[RCopeland](https://github.com/RCopeland) |
+
+[<img alt="nechita" src="https://avatars5.githubusercontent.com/u/20286399?v=4&s=117" width="117">](https://github.com/wesbos/Learn-Node/commits?author=nechita) |
+:---: |
+[nechita](https://github.com/nechita) |
+<!-- CONTRIBUTORS -->

@@ -27,3 +27,8 @@ exports.menu = [
   { slug: '/add', title: 'Add', icon: 'add', },
   { slug: '/map', title: 'Map', icon: 'map', },
 ];
+
+// Store/post content excerpt
+exports.excerpt = (content, limit = 20) => {
+  return content.split(" ").slice(0, limit).join(" ");
+};

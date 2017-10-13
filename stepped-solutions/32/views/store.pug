@@ -5,7 +5,7 @@ block content
     .single__hero
       img.single__image(src=`/uploads/${store.photo || 'store.png'}`)
       h2.title.title--single
-        a(href=`/stores/${store.slug}`) #{store.name}
+        a(href=`/store/${store.slug}`) #{store.name}
 
   .single__details.inner
     img.single__map(src=h.staticMap(store.location.coordinates))

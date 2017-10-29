@@ -2,13 +2,15 @@ import axios from 'axios';
 import dompurify from 'dompurify';
 
 function searchResultsHTML(stores) {
-  return stores.map(store => {
-    return `
-      <a href="/store/${store.slug}" class="search__result">
+  return stores
+    .map(store => {
+      return `
+      <a href="/stores/${store.slug}" class="search__result">
         <strong>${store.name}</strong>
       </a>
     `;
-  }).join('');
+    })
+    .join('');
 }
 
 function typeAhead(search) {
@@ -43,7 +45,7 @@ function typeAhead(search) {
   });
 
   // handle keyboard inputs
-  searchInput.on('keyup', (e) => {
+  searchInput.on('keyup', e => {
     // if they aren't pressing up, down or enter, who cares!
     if (![38, 40, 13].includes(e.keyCode)) {
       return; // nah
@@ -57,7 +59,7 @@ function typeAhead(search) {
     } else if (e.keyCode === 40) {
       next = items[0];
     } else if (e.keyCode === 38 && current) {
-      next = current.previousElementSibling || items[items.length - 1]
+      next = current.previousElementSibling || items[items.length - 1];
     } else if (e.keyCode === 38) {
       next = items[items.length - 1];
     } else if (e.keyCode === 13 && current.href) {

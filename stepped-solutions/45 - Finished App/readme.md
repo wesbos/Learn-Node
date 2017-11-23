@@ -1,6 +1,4 @@
-## What is this?
-
-Just you wait folks!
+## Learn Node Starter Files
 
 ## Sample Data
 

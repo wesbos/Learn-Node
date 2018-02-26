@@ -2,13 +2,11 @@ import axios from 'axios';
 import dompurify from 'dompurify';
 
 function searchResultsHTML(stores) {
-  return stores.map(store => {
-    return `
-      <a href="/store/${store.slug}" class="search__result">
-        <strong>${store.name}</strong>
-      </a>
-    `;
-  }).join('');
+  return stores.map(store => `
+    <a href="/stores/${store.slug}" class="search__result">
+      <strong>${store.name}</strong>
+    </a>
+  `).join('');
 }
 
 function typeAhead(search) {

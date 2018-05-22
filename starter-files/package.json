@@ -53,7 +53,7 @@
     "babel-loader": "6.4.0",
     "babel-preset-env": "^1.6.0",
     "concurrently": "3.4.0",
-    "css-loader": "0.27.3",
+    "css-loader": "0.28.11",
     "extract-text-webpack-plugin": "2.1.0",
     "node-sass": "^4.7.2",
     "nodemon": "1.11.0",

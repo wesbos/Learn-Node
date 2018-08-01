@@ -1,0 +1,38 @@
+mixin storeForm(store = {})
+  form(action=`/add/${store.slug || ''}` method="POST" class="card" enctype="multipart/form-data")
+    label(for="name") Name
+    input(type="text" id="name" name="name" value=store.name)
+    label(for="address") Address
+    input(type="text" autocomplete="off" autocorrect="off" id="address" name="location[address]" value=store.location && store.location.address)
+    label(for="lng") Long
+    input(
+      type="text" 
+      id="lng" 
+      name="location[coordinates][0]" 
+      value=store.location && store.location.coordinates[0])
+    label(for="lat") Lat
+    input(
+      type="text" 
+      id="lat" 
+      name="location[coordinates][1]" 
+      value=store.location && store.location.coordinates[1])
+
+    label(for="photo") Photo
+    input(type="file" id="photo" name="photo" size="10240" accept=".jpg, .jpeg, .png")
+
+    label(for="description") Description
+    textarea(name="description" cols="30" rows="10")= store.description
+    - const choices = ['Tag 1', 'Tag 2', 'Tag 3']
+    - const tagChose = store.tags || []
+    ul.tags
+      each choice in choices
+        .tag.tag__choice
+          input(
+            type="checkbox" 
+            name="tags" 
+            id=choice 
+            value=choice
+            checked=tagChose.includes(choice)
+          )
+          label(for=choice)= choice
+    input(type="submit" value="Save" class="button")

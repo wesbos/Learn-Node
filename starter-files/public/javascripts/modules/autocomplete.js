@@ -1,5 +1,7 @@
 function autocomplete(input, latInput, lngInput) {
-  if(!input) retun;
+  if(!input) return;
+
+  // const googleApi = import('https://maps.googleapis.com/maps/api/js?key=AIzaSyD9ycobB5RiavbXpJBo0Muz2komaqqvGv0&libraries=places')
 
   const dropdown = new google.maps.places.Autocomplete(input);
 

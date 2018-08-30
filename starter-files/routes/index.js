@@ -17,4 +17,7 @@ router.post('/add/:slug',
   catchErrors(storeController.updateStore))
 router.get('/stores/:slug', catchErrors(storeController.getStore))
 router.get('/stores/:slug/edit', catchErrors(storeController.editStore))
+
+router.get('/tags', catchErrors(storeController.getPostByTag))
+router.get('/tags/:tag', catchErrors(storeController.getPostByTag))
 module.exports = router

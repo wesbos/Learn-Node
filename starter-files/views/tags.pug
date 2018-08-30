@@ -1,0 +1,18 @@
+extends layout
+
+include mixins/storeCard
+
+block content
+  .inner
+    h2= currentTag || title
+  
+    ul.tags
+      each tag in tags
+        li.tag
+          a.tag__link(href=`/tags/${tag._id}` class=`${tag._id === currentTag && 'tag__link--active'}`)
+            span.tag__text= tag._id
+            span.tag__count= tag.count
+
+    .stores
+      each store in stores
+        +storeCard(store)

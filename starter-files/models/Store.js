@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 const slug = require('slugs')
+const {findSlugNumber} = require('../utilities')
 
 const storeSchema = new mongoose.Schema({
   name: {
@@ -38,14 +39,38 @@ const storeSchema = new mongoose.Schema({
   photo: String
 })
 
-storeSchema.pre('save', function(next) {
+storeSchema.pre('save', async function(next) {
   if (!this.isNew) {
     this.updated = Date.now()
     next()
     return
   }
+
+  this.slug = slug(this.name)
+  const slugReg = new RegExp(`^(${this.slug})((-[0-9])?)$`, 'i')
+  const storeWithSlug = await this.constructor.find({slug: slugReg})
+
+  if (storeWithSlug.length) {
+    const slugNumbers = storeWithSlug.map((store) => {
+      if (store.slug === this.slug) return 0
+      return +store.slug.slice(store.slug.lastIndexOf('-') + 1)
+    })
+
+    this.slug += `-${findSlugNumber(slugNumbers)}`
+    next()
+    return
+  }
+
   this.slug = slug(this.name)
   next()
 })
+
+storeSchema.statics.getTagsList = function() {
+  return this.aggregate([
+    { $unwind: '$tags'},
+    { $group: { _id: '$tags', count: { $sum: 1 }}},
+    { $sort: { count: -1 }}
+  ])
+}
 
 module.exports = mongoose.model('Store', storeSchema)

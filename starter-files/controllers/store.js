@@ -25,7 +25,10 @@ exports.homePage = (req, res) => {
 exports.upload = upload.single('photo')
 
 exports.resize = async (req, res, next) => {
-  if (!req.file) next()
+  if (!req.file) {
+    next()
+    return
+  }
 
   // Add photo to request to user next
   const extension = req.file.mimetype.split('/')[1]
@@ -50,9 +53,11 @@ exports.createStore = async (req, res) => {
   res.redirect('/')
 }
 
-exports.getStore = async (req, res) => {
+exports.getStore = async (req, res, next) => {
   const {slug} = req.params
   const store = await Store.findOne({slug})
+
+  if (!store) return next()
 
   res.render('store', {title: `${store.name}`, store})
 }
@@ -88,4 +93,12 @@ exports.updateStore = async (req, res, next) => {
     'success', 
     `Successfully updated ${store.name}. <a href="/stores/${store.slug}">View store</a>`)
   res.redirect('/')
+}
+
+exports.getPostByTag = async (req, res, next) => {
+  const currentTag = req.params.tag
+  const tagsPromise = Store.getTagsList()
+  const storesPromise = currentTag ? Store.find({tags: currentTag}) : Store.find()
+  const [tags, stores] = await Promise.all([tagsPromise, storesPromise])
+  res.render('tags', {tags, title: 'Tags', currentTag, stores})
 }

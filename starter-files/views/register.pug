@@ -1,0 +1,9 @@
+extends layout
+
+include mixins/registerForm
+
+block content
+  .inner
+    h2= title
+
+    +registerForm()

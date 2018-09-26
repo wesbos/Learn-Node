@@ -16,6 +16,9 @@ const errorHandlers = require('./handlers/errorHandlers');
 // create our Express app
 const app = express();
 
+app.use(require('cors')());
+app.use(require('morgan')('dev'));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views')); // this is the folder where we keep our pug files
 app.set('view engine', 'pug'); // we use the engine pug, mustache or EJS work great too
@@ -28,7 +31,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Exposes a bunch of methods for validating data. Used heavily on userController.validateRegister
-app.use(expressValidator());
+// app.use(expressValidator());
 
 // populates req.cookies with any cookies that came along with the request
 app.use(cookieParser());

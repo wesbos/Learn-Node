@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const storeController = require('../controllers/store')
+const userController = require('../controllers/user')
 const {catchErrors} = require('../handlers/errorHandlers')
 
 // Do work here
@@ -20,4 +21,10 @@ router.get('/stores/:slug/edit', catchErrors(storeController.editStore))
 
 router.get('/tags', catchErrors(storeController.getPostByTag))
 router.get('/tags/:tag', catchErrors(storeController.getPostByTag))
+
+router.get('/login', userController.loginPage)
+router.get('/register', userController.registerPage)
+router.post('/register', userController.registerValidation, userController.registerPage)
+
 module.exports = router
+

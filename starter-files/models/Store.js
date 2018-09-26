@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-mongoose.Promise = global.Promise
+// mongoose.Promise = global.Promise
 const slug = require('slugs')
 const {findSlugNumber} = require('../utilities')
 

@@ -7,13 +7,6 @@ exports.loginPage = function(req, res) {
 }
 
 exports.registerPage = function(req, res) {
-  const error = validationResult(req);
-
-  if(!error.isEmpty()) {
-    res.json(error.array());
-    return;
-  }
-
   res.render('register', {title: 'Register Page'});
 }
 
@@ -30,5 +23,19 @@ exports.registerValidation = [
     .isLength({ min: 5 }).withMessage('Mật khẩu phải ít nhất 5 ký tự'),
   body('re-password').custom((value, {req}) => {
     if (value !== req.body.password) throw new Error('Xác nhận password không trùng khớp với password!');
-  }).not().isEmpty().withMessage('last')
+    else return true;
+  }),
+  sanitizeBody('email').normalizeEmail({
+    gmail_remove_dots: false,
+    gmail_remove_subaddress: false
+  }),
+  (req, res, next) => {
+    const error = validationResult(req);
+
+    if(!error.isEmpty()) {
+      req.flash('error', error.array().map(error => error.msg));
+      res.render('register', { title: 'Regsiter', body: req.body, flashes: req.flash() });
+      return;
+    }
+  }
 ]

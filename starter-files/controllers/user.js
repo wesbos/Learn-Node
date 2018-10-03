@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { body, validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
+const User = mongoose.model('User');
 
 exports.loginPage = function(req, res) {
   res.render('login', {title: 'Login Page'});
@@ -34,8 +35,16 @@ exports.registerValidation = [
 
     if(!error.isEmpty()) {
       req.flash('error', error.array().map(error => error.msg));
-      res.render('register', { title: 'Regsiter', body: req.body, flashes: req.flash() });
+      res.render('register', { 
+        title: 'Regsiter', 
+        // body: req.body,
+        name: req.body.name,
+        email: req.body.email, 
+        flashes: req.flash() 
+      });
       return;
     }
+
+    next();
   }
 ]

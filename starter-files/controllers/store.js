@@ -43,6 +43,7 @@ exports.resize = async (req, res, next) => {
 }
 
 exports.addStore = (req, res) => {
+  console.log(req.isAuthenticated());
   res.render('editStore', {title: 'Add Store'})
 }
 
@@ -63,7 +64,7 @@ exports.getStore = async (req, res, next) => {
 }
 
 exports.getStores = async (req, res) => {
-  const stores = await Store.find()
+  const stores = await Store.find();
   
   res.render('stores', {title: 'Stores', stores})
 }

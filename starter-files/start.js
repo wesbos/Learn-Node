@@ -15,13 +15,15 @@ mongoose.connect(process.env.DATABASE, {useNewUrlParser: true})
 const db = mongoose.connection
 db.once('open', () => {
   console.log('Connect to database')
-})  
+})
 mongoose.Promise = global.Promise // Tell Mongoose to use ES6 promises
 mongoose.connection.on('error', (err) => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`)
 })
+mongoose.set('debug', true);
 
-require('./models/Store')
+require('./models/Store');
+require('./models/User');
 
 // Start our app!
 const app = require('./app')

@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const md5 = require('md5');
 const validator = require('validator');
-const passportLocalMongoose = require('passport-local-mongoose');
+const crypto = require('crypto');
 
 const UserSchema = new Schema({
   email: {
@@ -17,9 +16,19 @@ const UserSchema = new Schema({
     type: String,
     required: "Xin vui lòng cung cấp tên đăng nhập",
     trim: true
-  }
+  },
+  hash: String,
+  salt: String
 });
 
-UserSchema.plugin(passportLocalMongoose);
+UserSchema.methods.setPassword = function(password) {
+  this.salt = crypto.randomBytes(16).toString('hex');
+  this.hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
+}
+
+UserSchema.methods.validatePassword = function(password) {
+  const hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
+  return hash === this.hash;
+}
 
 module.exports = mongoose.model('User', UserSchema);

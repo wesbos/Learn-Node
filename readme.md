@@ -6,7 +6,7 @@ These are the starter files and stepped solutions to accompany the LearnNode.com
 
 You'll start your application in the `starter-files` directory — feel free to rename it.
 
-If you need help, each folder number corresponds with where you should be at the *start* of a video. So if you are having trouble with video **24**, look to video **25** for the answer.
+If you need help, each folder number corresponds with where you should be at the *start* of a video. So if you are having trouble with video **24**, look to folder **25** for the answer.
 
 The stepped solutions are meant for you to apply on top of your existing code - they don't stand on their own. 
 

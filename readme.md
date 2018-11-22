@@ -36,8 +36,13 @@ Once you have the API key, simply place it in your `variables.env` file and rest
 
 Check out [this answer](https://stackoverflow.com/questions/7948789/mongodb-mongod-complains-that-there-is-no-data-db-folder#answer-7948986) on stack overflow to get mongoDB running locally.
 
+
+### Just started the course, downloaded all files but my server do not responde
+Please notice, that you should have a mongo db database and a connection to it. If you leave this for later and try to get into coding first, the application wouldn't work at all.
+
 ## I'm getting a `URIError: URI malformed` error when running `npm start`
 
 Thanks to [Chris Ellinger](https://twitter.com/devoidofgenius) for this: 
 
 > If you’re getting a `URIError: URI malformed` error when running `npm start`, break out your environment variables. Go into `variables.env` and split the URI like this `MONGO_URI=mongodb://host.com:port` `DB_USER=username` and `DB_PASS=password`. Then inside your `start.js` replace `mongoose.connect(process.env.DATABASE)` with `mongoose.connect(process.env.MONGO_URI, {user: process.env.DB_USER, pass: process.env.DB_PASS});`. I had issues connecting to my mongodb because my password contained symbols.
+

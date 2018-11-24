@@ -38,7 +38,7 @@ router.get('/register', userController.registerForm);
 // 3. we need to log them in
 router.post('/register',
   userController.validateRegister,
-  userController.register,
+  catchErrors(userController.register),
   authController.login
 );
 

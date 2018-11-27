@@ -14,7 +14,7 @@ const autoprefixer = require('autoprefixer');
 
 // This is our JavaScript rule that specifies what to do with .js files
 const javascript = {
-  test: /\.(js)$/, // see how we match anything that ends in `.js`? Cool
+  test: /\.js$/, // see how we match anything that ends in `.js`? Cool
   use: [{
     loader: 'babel-loader',
     options: { presets: ['env'] } // this is one way of passing options
@@ -22,7 +22,7 @@ const javascript = {
 };
 
 /*
-  This is our postCSS loader which gets fed into the next loader. I'm setting it up in it's own variable because its a didgeridog
+  This is our postCSS loader which gets fed into the next loader. I'm setting it up in its own variable because it's a didgeridog
 */
 
 const postcss = {
@@ -34,7 +34,7 @@ const postcss = {
 
 // this is our sass/css loader. It handles files that are require('something.scss')
 const styles = {
-  test: /\.(scss)$/,
+  test: /\.scss$/,
   // here we pass the options as query params b/c it's short.
   // remember above we used an object for each loader instead of just a string?
   // We don't just pass an array of loaders, we run them through the extract plugin so they can be outputted to their own .css file
@@ -57,7 +57,7 @@ const config = {
   // Once things are done, we kick it out to a file.
   output: {
     // path is a built in node module
-    // __dirname is a variable from node that gives us the
+    // __dirname is a Node variable that gives us the directory name of the current module
     path: path.resolve(__dirname, 'public', 'dist'),
     // we can use "substitutions" in file names like [name] and [hash]
     // name will be `App` because that is what we used above in our entry

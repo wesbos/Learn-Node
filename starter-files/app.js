@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
 const passport = require('passport');
 const promisify = require('es6-promisify');
 const flash = require('connect-flash');
@@ -27,8 +26,8 @@ app.set('view engine', 'pug'); // we use the engine pug, mustache or EJS work gr
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Takes the raw requests and turns them into usable properties on req.body
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // populates req.cookies with any cookies that came along with the request
 app.use(cookieParser());

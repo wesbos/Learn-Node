@@ -42,7 +42,8 @@ app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
-// // Passport JS is what we use to handle our logins
+// Passport JS is what we use to handle our logins
+// Middleware passport, must have
 app.use(passport.initialize());
 app.use(passport.session());
 

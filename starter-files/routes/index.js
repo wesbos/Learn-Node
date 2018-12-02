@@ -1,20 +1,25 @@
-const express = require('express')
-const router = express.Router()
-const storeController = require('../controllers/store')
-const userController = require('../controllers/user')
-const authController = require('../controllers/auth')
-const {catchErrors} = require('../handlers/errorHandlers')
+const express = require('express');
+const router = express.Router();
+const storeController = require('../controllers/store');
+const userController = require('../controllers/user');
+const {catchErrors} = require('../handlers/errorHandlers');
 const passport = require('passport'); 
+const { LOCAL_LOGIN } = require('../constant');
 
-// Do work here
+// Do work here`
 router.get('/', storeController.getStores)
-router.get('/add', storeController.addStore)
-router.post('/add', 
+router.get('/add', 
+  userController.loginGuarantee,
+  storeController.addStore);
+  
+router.post('/add',
+  userController.loginGuarantee,
   storeController.upload,
   catchErrors(storeController.resize),
   catchErrors(storeController.createStore)
 )
-router.post('/add/:slug', 
+router.post('/add/:slug',
+  userController.loginGuarantee,
   storeController.upload,
   catchErrors(storeController.resize),
   catchErrors(storeController.updateStore))
@@ -25,21 +30,18 @@ router.get('/tags', catchErrors(storeController.getPostByTag))
 router.get('/tags/:tag', catchErrors(storeController.getPostByTag))
 
 router.get('/login', userController.loginPage);
-router.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  successMessage: 'Đăng nhập thành công',
-  failureRedirect: '/login',
-  failureMessage: 'Xin hãy thử lại'
-})
-);
+router.post('/login', userController.login);
 
-router.get('/logout', authController.logout);
+router.get('/logout', userController.logout);
 
 router.get('/register', userController.registerPage)
 router.post('/register', 
   userController.registerValidation, 
-  catchErrors(authController.register)
-)
+  catchErrors(userController.register)
+);
+
+router.get('/account', userController.accountPage);
+router.post('/account', userController.updateAccount);
 
 module.exports = router
 

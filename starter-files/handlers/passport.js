@@ -3,7 +3,12 @@ const mongoose = require('mongoose');
 const LocalStrategy = require('passport-local');
 const User = mongoose.model('User');
 
-passport.use(new LocalStrategy(
+const {LOCAL_LOGIN} = require('../constant');
+
+/**
+ * Setting for passport with Strategy used
+ */
+passport.use(LOCAL_LOGIN, new LocalStrategy(
   {usernameField: 'email', session: false},
   async (email, password, done) => {
     try {
@@ -17,12 +22,21 @@ passport.use(new LocalStrategy(
   }
 ));
 
+/**
+ * Serilize User
+ * Happen when user login
+ * Decide which with go to session
+ */
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
+/**
+ * Deserialize User
+ * Happen when user authenticated
+ * This keep user login
+ */
 passport.deserializeUser((id, done) => {
-  console.log('run deserializeUser');
   User.findById(id, function(err, user) {
     done(err, user);
   });

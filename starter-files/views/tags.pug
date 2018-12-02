@@ -12,7 +12,11 @@ block content
           a.tag__link(href=`/tags/${tag._id}` class=`${tag._id === currentTag && 'tag__link--active'}`)
             span.tag__text= tag._id
             span.tag__count= tag.count
-
+    
     .stores
       each store in stores
         +storeCard(store)
+
+      if !stores.length
+        p Chưa có bài nào thuộc tag #{currentTag}
+      

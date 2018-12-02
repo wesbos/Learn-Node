@@ -18,7 +18,8 @@ const UserSchema = new Schema({
     trim: true
   },
   hash: String,
-  salt: String
+  salt: String,
+  
 });
 
 UserSchema.methods.setPassword = function(password) {
@@ -30,5 +31,11 @@ UserSchema.methods.validatePassword = function(password) {
   const hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
   return hash === this.hash;
 }
+
+UserSchema.virtual('gravatar').get(function() {
+  const hashEmail = crypto.createHash('md5').update(this.email).digest('hex');
+
+  return `https://gravatar.com/avatar/${hashEmail}?s=200`;
+});
 
 module.exports = mongoose.model('User', UserSchema);

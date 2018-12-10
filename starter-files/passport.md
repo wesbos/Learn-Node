@@ -65,6 +65,5 @@ app.use(passport.session());
 ![Reset password](IMG_0516.jpg)
 
 
-
 - How passport working?
 

@@ -19,7 +19,8 @@ const UserSchema = new Schema({
   },
   hash: String,
   salt: String,
-  
+  resetPasswordToken: String,
+  resetPasswordExpires: Date
 });
 
 UserSchema.methods.setPassword = function(password) {

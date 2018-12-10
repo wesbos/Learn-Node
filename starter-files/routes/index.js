@@ -2,9 +2,7 @@ const express = require('express');
 const router = express.Router();
 const storeController = require('../controllers/store');
 const userController = require('../controllers/user');
-const {catchErrors} = require('../handlers/errorHandlers');
-const passport = require('passport'); 
-const { LOCAL_LOGIN } = require('../constant');
+const { catchErrors } = require('../handlers/errorHandlers');
 
 // Do work here`
 router.get('/', storeController.getStores)
@@ -35,13 +33,18 @@ router.post('/login', userController.login);
 router.get('/logout', userController.logout);
 
 router.get('/register', userController.registerPage)
-router.post('/register', 
+router.post('/register',
   userController.registerValidation, 
   catchErrors(userController.register)
 );
 
 router.get('/account', userController.accountPage);
 router.post('/account', userController.updateAccount);
+
+router.post('/forgot', userController.forgotPassword);
+
+router.get('/account/reset/:token', userController.resetPasswordPage);
+router.post('/account/reset', userController.resetPasswordValidation , catchErrors(userController.updatePassword));
 
 module.exports = router
 

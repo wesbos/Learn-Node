@@ -4,6 +4,7 @@ const { sanitizeBody } = require('express-validator/filter');
 const User = mongoose.model('User');
 const passport = require('passport'); 
 const { LOCAL_LOGIN } = require('../constant');
+const crypto = require('crypto');
 
 exports.loginPage = function(req, res) {
   res.render('login', {title: 'Login Page'});
@@ -95,11 +96,6 @@ exports.login = passport.authenticate(LOCAL_LOGIN, {
   failureMessage: 'Xin hãy thử lại'
 });
 
-exports.accountPage = (req, res) => {
-  const { user } = req;
-  res.render('account', {title: 'Thông tin tài khoản cá nhân.', user})
-}
-
 exports.updateAccount = async (req, res) => {
   const { email, name } = req.body;
   const userInfo = {
@@ -114,4 +110,94 @@ exports.updateAccount = async (req, res) => {
 
   req.flash('success', 'Updated the profile');
   res.redirect('back');
+}
+
+exports.accountPage = (req, res) => {
+  const { user } = req;
+  res.render('account', {title: 'Thông tin tài khoản cá nhân.', user})
+}
+
+exports.forgotPassword = async (req, res) => {
+  // Check if email is available
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+
+  if(!user) {
+    req.flash('sucess', 'Please check mail to reset password');
+    res.redirect('back');
+    return;
+  }
+
+  // Generate id reset and expire
+  user.resetPasswordToken = crypto.randomBytes(20).toString('hex');
+  user.resetPasswordExpires = Date.now() + 3600000; // 1 hour from now
+
+  await user.save();
+  // Send it to user email
+  const URL_RESET = `http://${req.headers.host}/account/reset/${user.resetPasswordToken}`;
+  // render back with sucess message
+  req.flash('success', `Please visite ${URL_RESET} to reset password`);
+  res.redirect('back');
+}
+
+exports.resetPasswordPage = (req, res) => {
+  const { token } = req.params;
+  res.render('resetPassword', {title: 'Reset your password', token});
+}
+
+exports.resetPasswordValidation = [
+  body('password')
+    .not().isEmpty().withMessage('Vui lòng điền mật khẩu')
+    .isLength({ min: 5 }).withMessage('Mật khẩu phải ít nhất 5 ký tự'),
+  body('re-password').custom((value, {req}) => {
+    if (value !== req.body.password) throw new Error('Mật khẩu và xác nhận mật khẩu không giống nhau!');
+    else return true;
+  }),
+  (req, res, next) => {
+    const error = validationResult(req);
+
+    if(!error.isEmpty()) {
+      req.flash('error', error.array().map(error => error.msg));
+      res.redirect('back');
+      return;
+    }
+
+    next();
+  }
+]
+
+exports.updatePassword = async (req, res) => {
+  if(!req.body.token) {
+    req.flash('error', 'Reset password invalid or expire');
+    return res.redirect('/login');
+  }
+
+  const user = await User.findOne({
+    resetPasswordToken: req.body.token
+  });
+
+  if (!user) {
+    req.flash('error', 'Reset password invalid or expire');
+    return res.redirect('/');
+  }
+
+  const isExpire = Date.now() > user.resetPasswordExpires;
+  
+  // whatever set resetPasswordToken and resetPasswordExpires to undefined
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpires = undefined;
+
+  if (isExpire) {
+    await user.save();
+    req.flash('error', 'Reset password invalid or expire');
+    return res.redirect('/');
+  }
+
+  user.setPassword(req.body.password);
+
+  const updateUser = await user.save();
+  await req.login(updateUser);
+
+  req.flash('success', 'Updated password');
+  res.redirect('/');
 }

@@ -5,6 +5,7 @@ const User = mongoose.model('User');
 const passport = require('passport'); 
 const { LOCAL_LOGIN } = require('../constant');
 const crypto = require('crypto');
+const { sendMail } = require('../handlers/mail');
 
 exports.loginPage = function(req, res) {
   res.render('login', {title: 'Login Page'});
@@ -136,7 +137,12 @@ exports.forgotPassword = async (req, res) => {
   // Send it to user email
   const URL_RESET = `http://${req.headers.host}/account/reset/${user.resetPasswordToken}`;
   // render back with sucess message
-  req.flash('success', `Please visite ${URL_RESET} to reset password`);
+  await sendMail('password-reset', {
+    user: {mail: email, subject: 'Store reset your password!!!'},
+    resetURL: URL_RESET
+  });
+
+  req.flash('success', `Please check your mail to reset password!!!`);
   res.redirect('back');
 }
 

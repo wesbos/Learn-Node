@@ -48,15 +48,19 @@ exports.addStore = (req, res) => {
 }
 
 exports.createStore = async (req, res) => {
-  const store = await (new Store(req.body)).save()
+  const store = new Store({
+    ...req.body,
+    author: req.user._id
+  });
+  await store.save();
 
   // res.redirect(`/store/${store.slug}`)
-  res.redirect('/')
+  res.redirect('/');
 }
 
 exports.getStore = async (req, res, next) => {
   const {slug} = req.params
-  const store = await Store.findOne({slug})
+  const store = await Store.findOne({slug}).populate('author');
 
   if (!store) return next()
 
@@ -102,4 +106,23 @@ exports.getPostByTag = async (req, res, next) => {
   const storesPromise = currentTag ? Store.find({tags: currentTag}) : Store.find()
   const [tags, stores] = await Promise.all([tagsPromise, storesPromise])
   res.render('tags', {tags, title: 'Tags', currentTag, stores})
+}
+
+exports.searchStore = async (req, res) => {
+  const stores = await Store
+  // first find stores that match
+  .find({
+    $text: {
+      $search: req.query.q
+    }
+  }, {
+    score: { $meta: 'textScore' }
+  })
+  // the sort them
+  .sort({
+    score: { $meta: 'textScore' }
+  })
+  // limit to only 5 results
+  .limit(5);
+  res.json(stores);
 }

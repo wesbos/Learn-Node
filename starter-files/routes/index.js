@@ -22,7 +22,8 @@ router.post('/add/:slug',
   catchErrors(storeController.resize),
   catchErrors(storeController.updateStore))
 router.get('/stores/:slug', catchErrors(storeController.getStore))
-router.get('/stores/:slug/edit', catchErrors(storeController.editStore))
+router.get('/stores/:slug/edit', 
+userController.loginGuarantee, catchErrors(storeController.editStore))
 
 router.get('/tags', catchErrors(storeController.getPostByTag))
 router.get('/tags/:tag', catchErrors(storeController.getPostByTag))
@@ -46,5 +47,6 @@ router.post('/forgot', userController.forgotPassword);
 router.get('/account/reset/:token', userController.resetPasswordPage);
 router.post('/account/reset', userController.resetPasswordValidation , catchErrors(userController.updatePassword));
 
+router.get('/search', catchErrors(storeController.searchStore));
 module.exports = router
 

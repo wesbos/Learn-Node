@@ -81,12 +81,13 @@ exports.logout = async function(req, res) {
   res.redirect('/');
 }
 
-exports.loginGuarantee = (req, res) => {
+exports.loginGuarantee = (req, res, next) => {
   if(req.isAuthenticated()) {
     next();
+    return;
   }
 
-  req.flash('warning', 'You need login to continue!');
+  req.flash('error', 'You need login to continue!');
   res.redirect('/login');
 }
 

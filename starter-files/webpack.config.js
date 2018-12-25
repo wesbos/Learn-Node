@@ -1,7 +1,6 @@
 /*
   Okay folks, want to learn a little bit about webpack?
 */
-
 const path = require('path');
 const webpack = require('webpack');
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -14,11 +13,11 @@ const autoprefixer = require('autoprefixer');
 
 // This is our JavaScript rule that specifies what to do with .js files
 const javascript = {
-  test: /\.(js)$/, // see how we match anything that ends in `.js`? Cool
-  use: [{
-    loader: 'babel-loader',
-    options: { presets: ['env'] } // this is one way of passing options
-  }],
+  test: /\.(js|jsx)$/,
+  exclude: /node_modules/,
+  use: {
+    loader: "babel-loader"
+  }
 };
 
 /*
@@ -65,7 +64,7 @@ const config = {
 
   // remember we said webpack sees everthing as modules and how different loaders are responsible for different file types? Here is is where we implement them. Pass it the rules for our JS and our styles
   module: {
-    rules: [styles]
+    rules: [styles, javascript]
   },
   // finally we pass it an array of our plugins - uncomment if you want to uglify
   // plugins: [uglify]

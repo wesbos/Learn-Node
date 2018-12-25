@@ -36,8 +36,18 @@ const storeSchema = new mongoose.Schema({
       required: 'Xin vui lòng cung cấp địa chỉ'
     }
   },
-  photo: String
+  photo: String,
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: 'Mã tác giã không hợp lệ'
+  }
 })
+
+storeSchema.index({
+  name: 'text',
+  description: 'text'
+});
 
 storeSchema.pre('save', async function(next) {
   if (!this.isNew) {

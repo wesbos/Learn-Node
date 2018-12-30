@@ -5,3 +5,4 @@ node_modules/
 haters/
 variables.env
 variables.env.now
+starter-files/public

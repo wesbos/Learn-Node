@@ -7,7 +7,7 @@ if (major < 7 || (major === 7 && minor <= 5)) {
   process.exit();
 }
 
-// import environmental variables from our variables.env file
+// npm package that imports environmental variables from our variables.env file
 require('dotenv').config({ path: 'variables.env' });
 
 // Connect to our Database and handle any bad connections
@@ -19,6 +19,8 @@ mongoose.connection.on('error', (err) => {
 
 // READY?! Let's go!
 
+// import all of our models
+require('./models/Store');
 
 // Start our app!
 const app = require('./app');

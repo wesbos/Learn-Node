@@ -13,10 +13,10 @@ exports.registerForm = (req, res) => {
 // registration data validation middleware
 exports.validateRegister = (req, res, next) => {
     // these come in express-validator
-    req.sanitizeBody('name')                                    // sanitize name data supplied
-    req.checkBody('name', 'You must supply a name').notEmpty()  // make name required
-    req.checkBody('email', 'Email not valid').isEmail()         // check for valid email format
-    req.sanitizeBody('email').normalizeEmail({                  // normalize email inputs
+    req.sanitizeBody('name')
+    req.checkBody('name', 'You must supply a name').notEmpty()
+    req.checkBody('email', 'Email not valid').isEmail()
+    req.sanitizeBody('email').normalizeEmail({
         remove_dots: false,
         remove_extension: false,
         gmail_remove_subaddress: false

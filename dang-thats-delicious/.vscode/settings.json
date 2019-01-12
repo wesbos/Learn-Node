@@ -1,0 +1,17 @@
+{
+    "editor.tokenColorCustomizations": {
+        "[Abyss]": {
+            "comments": "#1c6ab3",
+            "strings": "#79d870",
+            "textMateRules": [
+                {
+                    "scope": "entity.name.tag",
+                    "settings": {
+                        "foreground": "#4c8ae7"
+                    }
+                }
+            ]
+        }
+    }
+}
+// "comments": "#2a81d3",

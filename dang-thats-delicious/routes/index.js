@@ -6,12 +6,13 @@ const authController = require('../controllers/authController')
 
 router.get('/', storeController.homePage);
 
-router.get('/add', storeController.addStore)
+router.get('/add', authController.isLoggedIn, storeController.addStore)
 router.post('/add', storeController.createStore)
 
 router.get('/login', userController.loginForm)
-router.post('/login', () => console.log('login data posted!'))
+router.post('/login', authController.login)
 
+router.get('/logout', authController.logout)
 
 router.get('/register', userController.registerForm)
 router.post('/register',

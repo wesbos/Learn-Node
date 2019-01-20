@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "this_folder_should_never_appear"
+  },
+  "exclude": [
+    "node_modules",
+    "public"
+  ]
+}

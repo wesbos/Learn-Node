@@ -100,7 +100,8 @@ storeSchema.statics.getTopStores = function() {
 storeSchema.virtual('reviews', {
   ref: 'Review', // what model to link?
   localField: '_id', // which field on the store?
-  foreignField: 'store' // which field on the review?
+  foreignField: 'store', // which field on the review?
+  options: { sort: { created: -1 } } //sort reviews by date created
 });
 
 function autopopulate(next) {

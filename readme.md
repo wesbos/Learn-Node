@@ -2,7 +2,7 @@
 
 # Learn Node Starter Files + Stepped Solutions
 
-These are the starter files and stepped solutions to accompany the LearnNode.com course.
+These are the starter files and stepped solutions to accompany the [course](https://learnnode.com).
 
 You'll start your application in the `starter-files` directory — feel free to rename it.
 

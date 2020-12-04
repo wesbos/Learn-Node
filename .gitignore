@@ -6,3 +6,4 @@ haters/
 variables.env
 variables.env.now
 *.lock
+*/dist/

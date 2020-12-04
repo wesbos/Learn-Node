@@ -1,0 +1,56 @@
+.tags {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  display: block;
+  margin-right: 1rem;
+  &__choice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    input {
+      width: auto;
+      right: -1.5rem;
+      margin-right: -1rem;
+      position: relative;
+      z-index: 2;
+      & + label {
+        background: $grey;
+        padding: 1rem 1rem 1rem 4rem;
+      }
+      &:checked + label {
+        background: $yellow;
+      }
+    }
+  }
+  &__link {
+    background:$yellow;
+    color:$black;
+    display: flex;
+    padding-left: 10px;
+    clip-path: polygon(10px 0%, 100% 1%, 100% 100%, 10px 100%, 0% 50%);
+    &--active {
+      background: lighten($purple, 40%);
+      .tag__text {
+        color: white;
+      }
+    }
+  }
+  &__text {
+    padding: 1rem 1rem;
+    display: block;
+  }
+  &__count {
+    padding: 1rem 1rem;
+    background: white;
+    border-left: 3px solid rgba(0,0,0,0.1);
+    margin-right: -1px; /* ugh */
+    background-clip: padding-box;
+  }
+}

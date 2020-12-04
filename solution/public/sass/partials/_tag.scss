@@ -23,6 +23,7 @@
       & + label {
         background: $grey;
         padding: 1rem 1rem 1rem 4rem;
+        text-transform: capitalize;
       }
       &:checked + label {
         background: $yellow;
@@ -30,8 +31,8 @@
     }
   }
   &__link {
-    background:$yellow;
-    color:$black;
+    background: $yellow;
+    color: $black;
     display: flex;
     padding-left: 10px;
     clip-path: polygon(10px 0%, 100% 1%, 100% 100%, 10px 100%, 0% 50%);
@@ -49,7 +50,7 @@
   &__count {
     padding: 1rem 1rem;
     background: white;
-    border-left: 3px solid rgba(0,0,0,0.1);
+    border-left: 3px solid rgba(0, 0, 0, 0.1);
     margin-right: -1px; /* ugh */
     background-clip: padding-box;
   }

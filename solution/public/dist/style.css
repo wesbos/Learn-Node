@@ -817,7 +817,8 @@ label {
       z-index: 2; }
       .tag__choice input + label {
         background: #e6e6e6;
-        padding: 1rem 1rem 1rem 4rem; }
+        padding: 1rem 1rem 1rem 4rem;
+        text-transform: capitalize; }
       .tag__choice input:checked + label {
         background: #FFC40E; }
   .tag__link {

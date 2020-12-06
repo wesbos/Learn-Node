@@ -1,5 +1,13 @@
 const mongoose = require("mongoose");
 const Store = mongoose.model("Store");
+
+exports.getStores = async (req, res) => {
+  // query db for all stores
+  const stores = await Store.find();
+  console.log(stores);
+  res.render("stores", { title: "Stores", stores });
+};
+
 exports.homePage = (req, res) => {
   res.render("index");
 };

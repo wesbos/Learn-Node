@@ -26,17 +26,23 @@ exports.createStore = async (req, res) => {
 };
 
 exports.updateStore = async (req, res) => {
-  const { storeId } = req.params;
-  console.log("about to update", storeId);
-  const result = await Store.findOneAndUpdate({ _id: storeId }, req.body, {
-    new: true, // return updated store
-    runValidators: true,
-  }).exec();
+  const {storeId} = req.params;
+  const store = await Store.findById(storeId);
+  Object.keys(req.body).forEach(key => {
+    store[key] = req.body[key];
+  });
+  console.log('about to update', storeId);
+  store.location.type = 'Point'
+  const result = await store.save();
+  // const result = await Store.findOneAndUpdate({ _id: storeId }, req.body, {
+  //   new: true, // return updated store
+  //   runValidators: true,
+  // }).exec();
   req.flash(
-    "success",
-    `Successfully updated <strong>${result.name}</strong>. <a href="/store/${result.slug}">View store -></a>`
+      'success',
+      `Successfully updated <strong>${ result.name }</strong>. <a href="/store/${ result.slug }">View store -></a>`
   );
-  res.redirect(`/stores/${result.id}/edit`);
+  res.redirect(`/stores/${ result.id }/edit`);
 };
 
 exports.editStore = async (req, res) => {

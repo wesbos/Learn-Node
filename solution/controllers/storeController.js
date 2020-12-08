@@ -1,28 +1,58 @@
-const mongoose = require("mongoose");
-const Store = mongoose.model("Store");
+const mongoose = require('mongoose');
+const Store = mongoose.model('Store');
+const multer = require('multer');
+const jimp = require('jimp');
+const uuid = require('uuid');
+
+const multerOptions = {
+  store: multer.memoryStorage(),
+  fileFilter(req, file, next) {
+    const isPhoto = file.mimetype.startsWith('image/');
+    if (isPhoto) {
+      next(null, true);
+      return;
+    }
+    next({message: 'That file type isn\'t allowed'}, false);
+  }
+};
 
 exports.getStores = async (req, res) => {
   // query db for all stores
   const stores = await Store.find();
-  res.render("stores", { title: "Stores", stores });
+  res.render('stores', {title: 'Stores', stores});
 };
 
 exports.homePage = (req, res) => {
-  res.render("index");
+  res.render('index');
 };
 
 exports.addStore = (req, res) => {
-  res.render("editStore", { title: "Add store" });
+  res.render('editStore', {title: 'Add store'});
+};
+
+exports.upload = multer(multerOptions).single('photo');
+exports.resize = async (req, res, next) => {
+  // check for images
+  if (!req.file) {
+    return next(); // skip to next middleware
+  }
+  console.log(req.file);
+  const ext = req.file.mimetype.split('/')[1];
+  req.body.photo = `${ uuid.v4() }.${ ext }`;
+  const photo = await jimp.read(req.file.buffer);
+  await photo.resize(800, jimp.AUTO);
+  await photo.write(`./public/uploads/${ req.body.photo }`);
+  next();
 };
 
 exports.createStore = async (req, res) => {
   const store = new Store(req.body);
   const result = await store.save();
   req.flash(
-    "success",
-    `Successfully created ${result.name}. Care to leave a review`
+      'success',
+      `Successfully created ${ result.name }. Care to leave a review`
   );
-  res.redirect(`/store/${result.slug}`);
+  res.redirect(`/store/${ result.slug }`);
 };
 
 exports.updateStore = async (req, res) => {

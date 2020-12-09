@@ -13,6 +13,7 @@ router.post('/add',
     catchErrors(storeController.createStore)
 );
 router.get('/stores/:storeId/edit', catchErrors(storeController.editStore));
+router.get('/stores/:slug', catchErrors(storeController.showStore));
 router.post('/update/:storeId',
     storeController.upload,
     catchErrors(storeController.resize),

@@ -7,6 +7,6 @@ mixin storeCard(store = {})
             != h.icon('pencil')
       img(src=`/uploads/${store.photo || 'store.png'}`, alt=`${store.name}`)
       h2.title
-        a(href=`/store/${store.slug}`) #{store.name.split(' ').slice(0, 3).join(' ')}
+        a(href=`/stores/${store.slug}`) #{store.name.split(' ').slice(0, 3).join(' ')}
     .store__details
       p= store.description.split(' ').slice(0, 25).join(' ')

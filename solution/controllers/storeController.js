@@ -81,3 +81,11 @@ exports.editStore = async (req, res) => {
   // todo confirm rights to edit store
   res.render("editStore", { title: `Edit ${store.name}`, store });
 };
+
+exports.showStore = async (req, res, next) => {
+  const store = await Store.findOne({slug: req.params.slug});
+  if (!store) {
+    return next()
+  }
+  res.render('showStore', {title: store.name, store});
+}

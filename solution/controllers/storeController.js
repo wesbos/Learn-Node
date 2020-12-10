@@ -52,7 +52,7 @@ exports.createStore = async (req, res) => {
       'success',
       `Successfully created ${ result.name }. Care to leave a review`
   );
-  res.redirect(`/store/${ result.slug }`);
+  res.redirect(`/stores/${ result.slug }`);
 };
 
 exports.updateStore = async (req, res) => {
@@ -70,7 +70,7 @@ exports.updateStore = async (req, res) => {
   // }).exec();
   req.flash(
       'success',
-      `Successfully updated <strong>${ result.name }</strong>. <a href="/store/${ result.slug }">View store -></a>`
+      `Successfully updated <strong>${ result.name }</strong>. <a href="/stores/${ result.slug }">View store -></a>`
   );
   res.redirect(`/stores/${ result.id }/edit`);
 };

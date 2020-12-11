@@ -85,7 +85,13 @@ exports.editStore = async (req, res) => {
 exports.showStore = async (req, res, next) => {
   const store = await Store.findOne({slug: req.params.slug});
   if (!store) {
-    return next()
+    return next();
   }
   res.render('showStore', {title: store.name, store});
-}
+};
+
+exports.getStoresByTag = async (req, res) => {
+  const tags = await Store.getTagsList();
+  const selectedTag = req.params.tag;
+  res.render('tags', {tags, title: 'Tags', tag: selectedTag || null});
+};

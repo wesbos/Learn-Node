@@ -7,3 +7,5 @@ variables.env
 variables.env.now
 *.lock
 dist/
+uploads/
+.cache/

@@ -1,0 +1,7 @@
+mixin loginForm()
+  form.form(action="/login" method="POST")
+    label(for="email") Email Address
+    input#email(type="email" name="email")
+    label(for="password") Password
+    input#password(type="password" name="password")
+    input(type="submit" value="Log In -<" class="button")

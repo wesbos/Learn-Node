@@ -16,7 +16,7 @@ exports.logout = (req, res) => {
 exports.isLoggedIn = (req, res, next) => {
   // is authenticated
   if (req.isAuthenticated()) {
-    next(); // logged in
+    return next(); // logged in
   }
 
   req.flash("error", "You must be logged in.");

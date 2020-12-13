@@ -68,10 +68,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// After allllll that above middleware, we finally handle our own routes!
+// After al that above middleware, we finally handle our own routes!
 app.use("/", routes);
 
-// If that above routes didnt work, we 404 them and forward to error handler
+// If that above routes didn't work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound);
 
 // One of our error handlers will see if these errors are just validation errors

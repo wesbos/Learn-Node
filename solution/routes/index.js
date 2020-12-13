@@ -8,17 +8,23 @@ const { catchErrors } = require("../handlers/errorHandlers");
 // Do work here
 router.get("/", catchErrors(storeController.getStores));
 router.get("/stores", catchErrors(storeController.getStores));
-router.get("/add", storeController.addStore);
+router.get("/add", authController.isLoggedIn, storeController.addStore);
 router.post(
   "/add",
+  authController.isLoggedIn,
   storeController.upload,
   catchErrors(storeController.resize),
   catchErrors(storeController.createStore)
 );
-router.get("/stores/:storeId/edit", catchErrors(storeController.editStore));
+router.get(
+  "/stores/:storeId/edit",
+  authController.isLoggedIn,
+  catchErrors(storeController.editStore)
+);
 router.get("/stores/:slug", catchErrors(storeController.showStore));
 router.post(
   "/update/:storeId",
+  authController.isLoggedIn,
   storeController.upload,
   catchErrors(storeController.resize),
   catchErrors(storeController.updateStore)

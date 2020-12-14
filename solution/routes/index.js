@@ -50,4 +50,17 @@ router.post(
   authController.isLoggedIn,
   catchErrors(userController.updateAccount)
 );
+// pass reset flow
+
+// reset flow form in login page
+// handle form submission
+router.post("/account/forgot", catchErrors(authController.forgot));
+// handle opening reset link
+router.get("/account/reset/:token", catchErrors(authController.reset));
+router.post(
+  "/account/reset/:token",
+  authController.confirmedPasswords,
+  catchErrors(authController.update)
+);
+
 module.exports = router;

@@ -22,7 +22,7 @@ mixin storeForm(store = {})
     if store.photo
       img(src=`/uploads/${store.photo}` alt=`${store.name}` width=200)
 
-    - const choices = ['WiFi', 'open late', 'family friendly', 'vegetarian', 'licensed']
+    - const choices = ['Wifi', 'Open Late', 'Family Friendly', 'Vegetarian', 'Licensed']
     ul.tags
       each choice in choices
         .tag.tag__choice

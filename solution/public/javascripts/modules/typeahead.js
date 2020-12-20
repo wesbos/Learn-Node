@@ -1,4 +1,5 @@
-const axios = require("axios");
+import axios from "axios";
+import dompurify from "dompurify";
 
 const apiEndpoint = "/api/search";
 const activeClass = "search__result--active";
@@ -40,9 +41,12 @@ export default function typeAhead(searchEl) {
         });
         const { data } = results;
         if (data.length === 0) {
+          searchResults.innerHTML = dompurify.sanitize(
+            `<div class="search__result">No results found for ${e.target.value}</div>`
+          );
           return;
         }
-        searchResults.innerHTML = searchResultsHtml(data);
+        searchResults.innerHTML = dompurify.sanitize(searchResultsHtml(data));
         numResults = data.length;
       } catch (error) {
         console.error(error);

@@ -1,6 +1,7 @@
 const axios = require("axios");
 
 const apiEndpoint = "/api/search";
+const activeClass = "search__result--active";
 
 const searchResultsHtml = (stores) => {
   return stores
@@ -49,47 +50,45 @@ export default function typeAhead(searchEl) {
     }, 250);
   });
 
-  let currPos = -1;
-  let activeElement;
   searchInput.on("keyup", (e) => {
     const key = e.keyCode;
     // if key is not enter, up or down
     if (![13, 40, 38].includes(key) || numResults === 0) {
       return; // do nothing
     }
+    const elements = searchResults.querySelectorAll(".search__result");
+    const current = searchResults.querySelector(`.${activeClass}`);
+    let next;
     switch (key) {
       case 13:
-        if (currPos > -1 && activeElement) {
+        if (current) {
           // there is selected link, click it
-          activeElement.click();
+          window.location = current.href;
         }
         break;
-      case 40: // down?
-        console.log("go down");
-        if (currPos + 1 === numResults) {
-          // already all the way down
-          currPos = 0;
+      case 40:
+        // console.log("go down");
+        if (current) {
+          next = current.nextElementSibling || elements[0];
         } else {
-          currPos += 1;
+          next = elements[0];
         }
         break;
-      case 38: // down?
-        console.log("go up");
-        if (currPos === 0) {
-          // already all the way up
-          currPos = numResults - 1;
+      case 38:
+        // console.log("go up");
+        if (current) {
+          next =
+            current.previousElementSibling || elements[elements.length - 1];
         } else {
-          currPos -= 1;
+          next = elements[elements.length - 1];
         }
         break;
       default:
         console.error(`which key is ${key}`);
         break;
     }
-    console.log(key, currPos);
-    const elements = searchResults.querySelectorAll(".search__result");
-    activeElement = elements[currPos];
-    elements.forEach((el) => el.classList.remove("search__result--active"));
-    activeElement.classList.add("search__result--active");
+
+    current && current.classList.remove(activeClass);
+    next.classList.add(activeClass);
   });
 }

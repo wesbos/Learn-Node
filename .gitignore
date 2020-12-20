@@ -9,3 +9,4 @@ variables.env.now
 dist/
 uploads/
 .cache/
+.vscode/

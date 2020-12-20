@@ -11,8 +11,6 @@ const userSchema = new Schema({
     type: String,
     trim: true,
     lowercase: true,
-    index: true,
-    unique: true,
     validate: [validator.isEmail, "Invalid email address"],
     required: "Please enter an email address",
   },
@@ -29,9 +27,9 @@ userSchema.virtual("gravatar").get(function () {
   const hash = md5(this.email);
   return `https://gravatar.com/avatar/${hash}?s=200`;
 });
-
-userSchema.set("autoIndex", false);
 userSchema.plugin(passportLocalMongoose, { usernameField: "email" });
 userSchema.plugin(mongoDbErrorHandler);
+
+userSchema.index({ email: 1 }, { unique: true });
 
 module.exports = mongoose.model("User", userSchema);

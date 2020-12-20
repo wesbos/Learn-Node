@@ -14,7 +14,9 @@
     "blowitallaway": "node ./data/load-sample-data.js --delete",
     "now": "now -e DB_USER=@db_user -e DB_PASS=@db_pass -e NODE_ENV=\"production\" -e PORT=80"
   },
-  "browserslist": "last 3 versions",
+  "browserslist": [
+    "last 3 versions"
+  ],
   "dependencies": {
     "axios": "0.15.3",
     "body-parser": "1.17.1",

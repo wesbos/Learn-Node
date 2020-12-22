@@ -64,11 +64,18 @@ router.post(
 );
 
 router.get("/map", storeController.mapPage);
+router.get(
+  "/hearts",
+  authController.isLoggedIn,
+  catchErrors(storeController.heartPage)
+);
 
 // * API routes
 // search stores
 router.get("/api/search", catchErrors(storeController.searchStores));
 // plot stores on map
 router.get("/api/stores/near", catchErrors(storeController.mapStores));
+// heart a store
+router.post("/api/stores/:id/heart", catchErrors(storeController.heartStore));
 
 module.exports = router;

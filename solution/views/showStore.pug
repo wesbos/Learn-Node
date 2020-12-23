@@ -1,5 +1,7 @@
 extends layout
 include mixins/_reviewForm
+include mixins/_review
+
 block content
   .single
     .single__hero
@@ -20,3 +22,9 @@ block content
 
     if user
       +reviewForm(store)
+
+    if store.reviews
+      .reviews
+        each review in store.reviews
+          .review
+            +review(review)

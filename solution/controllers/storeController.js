@@ -18,9 +18,27 @@ const multerOptions = {
 };
 
 exports.getStores = async (req, res) => {
+  const { page } = req.params || 1;
+  const limit = 4;
+  const skip = (page - 1) * limit;
   // query db for all stores
-  const stores = await Store.find();
-  res.render("stores", { title: "Stores", stores });
+  const getStoresPromise = Store.find()
+    .skip(skip)
+    .limit(limit)
+    .sort({ created: -1 });
+  const countPromise = Store.count({});
+  const [stores, count] = await Promise.all([getStoresPromise, countPromise]);
+  const pages = Math.ceil(count / limit);
+
+  if (stores.length === 0 && skip) {
+    req.flash(
+      "info",
+      `Hey! You asked for page ${page}. But that doesn't exist, so I put you on page ${pages}`
+    );
+    res.redirect(`/stores/page/${pages}`);
+    return;
+  }
+  res.render("stores", { title: "Stores", stores, page, count, pages });
 };
 
 exports.homePage = (req, res) => {
@@ -174,4 +192,9 @@ exports.heartPage = async (req, res) => {
     _id: { $in: hearts },
   });
   res.render("stores", { title: "Hearted Stores", stores });
+};
+
+exports.topStores = async (req, res) => {
+  const stores = await Store.getTopStores();
+  res.render("topStores", { stores, title: "⭐ Top Stores!" });
 };

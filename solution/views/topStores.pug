@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  .inner
+    h2= `Top ${stores.length} stores`
+    table.table
+      thead
+        tr
+          th Photo
+          th Ranking
+          th Name
+          th Reviews
+          th Average Rating
+      tbody
+        each store, i in stores
+          tr
+            td: img(width=200 src=`/uploads/${store.photo || 'store.png'}`, alt=store.name)
+            td= (i+1)
+            td: a(href=`/stores/${store.slug}`) #{store.name}
+            td= store.reviews.length
+            td #{Number(store.averageRating).toFixed(1)} / 5.0

@@ -10,6 +10,7 @@ const { catchErrors } = require("../handlers/errorHandlers");
 // Do work here
 router.get("/", catchErrors(storeController.getStores));
 router.get("/stores", catchErrors(storeController.getStores));
+router.get("/stores/page/:page", catchErrors(storeController.getStores));
 router.get("/add", authController.isLoggedIn, storeController.addStore);
 router.post(
   "/add",
@@ -77,6 +78,8 @@ router.post(
   authController.isLoggedIn,
   catchErrors(reviewController.addReview)
 );
+
+router.get("/top", catchErrors(storeController.topStores));
 
 // * API routes
 // search stores

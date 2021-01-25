@@ -42,6 +42,7 @@ router.post('/account/reset/:token',
   catchErrors(authController.update)
 );
 router.get('/map', catchErrors(storeController.mapPage));
+router.get('/hearts', authController.isLoggedIn, catchErrors(storeController.getHearts))
 /*
   API
 */

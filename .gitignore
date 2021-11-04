@@ -2,6 +2,7 @@ node_modules/
 .DS_Store
 *.log
 .idea
+dist/
 haters/
 variables.env
 variables.env.now

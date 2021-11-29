@@ -4,7 +4,7 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const env = require("dotenv").config({ path: "variables.env" });
-const nodeEnv = env.parsed.NODE_ENV;
+const nodeEnv = process.env.NODE_ENV || env.parsed.NODE_ENV;
 
 /*
   webpack sees every file as a module.

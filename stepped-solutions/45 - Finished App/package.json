@@ -56,7 +56,7 @@
     "concurrently": "6.3.0",
     "css-loader": "6.5.1",
     "mini-css-extract-plugin": "2.4.3",
-    "node-sass": "6.0.1",
+    "node-sass": "7.0.0",
     "nodemon": "2.0.14",
     "now": "21.0.1",
     "postcss": "8.3.11",

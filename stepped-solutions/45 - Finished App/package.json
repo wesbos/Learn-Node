@@ -34,7 +34,7 @@
     "jimp": "0.16.1",
     "juice": "8.0.0",
     "md5": "2.3.0",
-    "moment": "2.29.1",
+    "moment": "2.29.4",
     "mongodb": "4.2.1",
     "mongoose": "6.0.12",
     "mongoose-mongodb-errors": "0.0.2",

@@ -36,7 +36,7 @@
     "md5": "2.3.0",
     "moment": "2.29.1",
     "mongodb": "4.2.1",
-    "mongoose": "6.0.12",
+    "mongoose": "6.4.6",
     "mongoose-mongodb-errors": "0.0.2",
     "multer": "1.4.3",
     "nodemailer": "6.7.0",
